@@ -14,11 +14,32 @@
         border-bottom: solid 5px;
     }
 
+.container {
+    background-color: white;
+    padding: 0px;
+}
     body {
   font-family: "Concert One", cursive;
   font-size: 16px;
-  background: blanchedalmond;
+  background: rgb(250, 153, 9);
 }
+#schedule {
+    list-style-type: none;
+    margin: 0px;
+}
+.secondary-ul {
+    display:list-item;
+    list-style-type: none;
+}
+
+
+.save-time {
+    background-color:chartreuse;
+    border-bottom: solid white 1px;
+    width: 65px;
+    height: 65px;
+}
+
 
 </style>
 <body>
@@ -30,7 +51,29 @@
         
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-1">
+                <div>9AM</div>
+            </div>
+            <div class="col-lg-10">
+                <input type="text" placeholder="What needs to be done" name="task-text" class="user-task-input"/>
+                <ul class="secondary-ul"></ul>
+            </div>
+            <div class="col-lg-1">
+                <submit class="save-time">Submit</submit>
+            </div>
+                <!-- <div class="time-slots"> -->
+                    <!-- <ul id="schedule">
+                        <li class="time-time">9AM</li>
+                        <li class="green-time green-time1">
+                            <input class="user-task-input">
+                            <ul class="secondary-ul">
+
+                            </ul>
+                        </li>
+                        <submit class="save-time">Save</submit>
+                    </ul> -->
+                    
+                <!-- </div> -->
 
 
 
@@ -42,30 +85,21 @@
                     <p>Todo Count: <span id="todo-count">0</span></p>
                     <ul id="todo-list"></ul>
                   </div> -->
-            </div>
         </div>
     </div>
     <!-- <script> -->
-
-<!-- //         GIVEN I am using a daily planner to create a schedule
-// WHEN I open the planner
-// THEN the current day is displayed at the top of the calendar
-// WHEN I scroll down
-// THEN I am presented with timeblocks for standard business hours
-// WHEN I view the timeblocks for that day
-// THEN each timeblock is color coded to indicate whether it is in the past, present, or future
-// WHEN I click into a timeblock
-// THEN I can enter an event
-// WHEN I click the save button for that timeblock
-// THEN the text for that event is saved in local storage
-// WHEN I refresh the page
-// THEN the saved events persist -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js" integrity="sha256-H9jAz//QLkDOy/nzE9G4aYijQtkLt9FvGmdUTwBk6gs=" crossorigin="anonymous"></script>
 <!-- <script src="moment.js"></script> -->
 <script>
-   
+$(document).ready(function() {
+
+
+var tasksArray9AM = [];
+var tasksArray10AM = [];
+
+
    //get the local storage items here
 var dateAndTime = moment().format('MMMM Do YYYY, h:mm:ss a'); // January 30th 2020, 11:07:51 pm
 $(".date-time").text(dateAndTime);
@@ -74,6 +108,30 @@ var monthAndDate = moment().format("MMMM Do");               // Jan 30th 20
 // moment().format('YYYY [escaped] YYYY');     // 2020 escaped 2020
 // moment().format();                          // 2020-01-30T23:07:51-08:00
 $(".date-time").text(weekDay + ", " + monthAndDate);
+
+
+//on clicking the save button,
+$(".save-time").on("click", function() {
+    var newListInput = $(".user-task-input").val(); // gathers the inputed item and puts into a varialbe. 
+    tasksArray9AM.push(newListInput);
+
+    for (var i = 0; i < tasksArray9AM.length; i++) {
+        var newListItem = $("<li>");
+        newListItem.text(tasksArray9AM[i]);
+        localStorage.setItem("secondary-ul", tasksArray9AM[i]);
+    }
+     // takes the input and puts in list item
+    $(".secondary-ul").append(newListItem); // appends list item to the correct ul div
+    // localStorage.setItem("secondary-ul", newListInput);
+});
+function reloadPage() {
+    
+}
+});
+// creates a list emelent to put the data. 
+//appends to the individual list item
+//saves to local storage, 
+
 // ok so first in html have each block out and made. designed in css. 
 // the css style has to be trigged by the time. so that when i certain time happens, the block equalling that time, is changed in css.
 
@@ -86,6 +144,8 @@ $(".date-time").text(weekDay + ", " + monthAndDate);
 
 //to do list for Friday: do the drink things. do the frankensence thing. take out the trash. send tiger schedules
 //later: do the baking soda thing. butt exercises, hiking, laundry, organizing, & cleaning
+
+
 </script>
 
     
