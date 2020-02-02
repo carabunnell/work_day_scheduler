@@ -413,7 +413,8 @@
                 }
                 appendingDiv.append(newListItem);
             }
- //-================================= CALLING THE FUNCTIONS ================================================               
+ //-================================= CALLING THE FUNCTIONS ================================================   
+            
             timeSlotGreyOut(am8, $(".future-8"), $(".user-task-input-8am"));
             timeSlotGreyOut(am9, $(".future-9"), $(".user-task-input-9am"));
             timeSlotGreyOut(am10, $(".future-10"), $(".user-task-input-10am"));
@@ -427,27 +428,6 @@
 
             getLocalStorage("Array-8am", $(".task-list-8am"), tasksArray8AM);
 
-            // function getLocalStorage(storageIndex, properDiv, array) {
-            //     localStorage.getItem(array);
-            //     printArrayToDiv(array, properDiv);
-            // }
-
-            // function creatingDivTasks(taskInput, array, printTasks, storageName) {
-            //     // pass in the reference to the input, the array per button. the div printing
-            //     newListInput = taskInput.val();
-            //     array.push(newListInput);
-            //     printArrayToDiv(array, printTasks);
-            //     localStorage.setItem(storageName, array);
-            // }
-
-            // function printArrayToDiv(array, appendingDiv) {
-
-            //     for (var i = 0; i < array.length; i++) {
-            //         var newListItem = $("<li>");
-            //         newListItem.text(array[i]);
-            //     }
-            //     appendingDiv.append(newListItem);
-            // }
 // ============================================ ON CLICK ==========================================
             //on clicking the save button,
             $(".save-task-8am").on("click", function () {
