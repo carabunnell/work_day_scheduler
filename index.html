@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- <link rel="stylesheet" href="style.css"> -->
 </head>
 <style>
@@ -14,140 +16,450 @@
         border-bottom: solid 5px;
     }
 
-.container {
-    background-color: white;
+    .container {
+        background-color: white;
+        padding: 0px;
+    }
+
+    body {
+        font-family: "Concert One", cursive;
+        font-size: 16px;
+    }
+
+    #schedule {
+        list-style-type: none;
+        margin: 0px;
+    }
+
+    .task-list {
+        display: list-item;
+        list-style-type: none;
+    }
+
+    /* .task-input-old {
+        background: grey !important;
+    } */
+
+    /* .task-input {
+        background-color: #77dd77;
+    } */
+
+    /* .task-row {
+    background: purple;
+} */
+
+
+    /* .save-task {
+        background-color: chartreuse;
+        border-bottom: solid white 1px;
+        width: 65px;
+        height: 65px;
+    } */
+
+    .description{
+  white-space: pre-wrap;
+}
+
+.time-block{
+  text-align: center;
+  border-radius: 15px;
+}
+
+.row {
+  /* white-space: pre-wrap; */
+  /* height: 80px; */
+  border-top: 1px solid white;;
+}
+
+.hour {
+  background-color: #ffffff;
+  color: #000000;
+  border-top: 1px dashed #000000;
+}
+
+/* .past {
+  background-color: #d3d3d3;
+  color: white;
+} */
+
+.present {
+  background-color: #ff6961;
+  color: white;
+}
+
+.future {
+  background-color: #77dd77;
+  color: white;
+  min-height: 80px;
+  padding: 0px;
+  border-top: 1px solid white;
+  /* background-color: #d3d3d3; */
+  /* color: white; */
+}
+
+.saveBtn {
+  border-left: 1px solid black;
+  height: 80px;
+  /* width: px; */
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background-color: #06AED5;
+  color: white;
+}
+
+.saveBtn:hover {
+    opacity: 0.5px;
+  /* font-size: 20px;
+  transition: all .3s ease-in-out; */
+}
+.col-lg-10 {
     padding: 0px;
 }
-    body {
-  font-family: "Concert One", cursive;
-  font-size: 16px;
-  background: rgb(250, 153, 9);
+.col-left {
+    padding-right: 0px;
 }
-#schedule {
-    list-style-type: none;
-    margin: 0px;
+.col-right {
+    padding-left: 0px;
 }
-.secondary-ul {
-    display:list-item;
-    list-style-type: none;
-}
-
-
-.save-time {
-    background-color:chartreuse;
-    border-bottom: solid white 1px;
-    width: 65px;
-    height: 65px;
-}
-
 
 </style>
+
 <body>
     <div class="container">
         <div class="jumbotron">
             <h1 class="text-center">Work Day Scheduler</h1>
             <p class="text-center">A simple calendar app for scheduling your work day.</p>
             <p class="text-center date-time"></p>
-        
+
         </div>
         <div class="row">
-            <div class="col-lg-1">
-                <div>9AM</div>
+            <div class="col-lg-1 col-left">
+                <div class="hour" id="time-slot-9" value="9">9AM</div>
             </div>
             <div class="col-lg-10">
-                <input type="text" placeholder="What needs to be done" name="task-text" class="user-task-input"/>
-                <ul class="secondary-ul"></ul>
+                <div class="future future-9">
+                    <input type="text" name="task-text"
+                    class="task-input user-task-input-9am" />
+                    <ul class="task-list task-list-9am"></ul>
+                </div>
+                
             </div>
-            <div class="col-lg-1">
-                <submit class="save-time">Submit</submit>
+            <div class="col-lg-1 col-right">
+                <div class="saveBtn">
+                    <submit class="save-task save-task-9am">Save</submit>
+                </div>
+               
             </div>
-                <!-- <div class="time-slots"> -->
-                    <!-- <ul id="schedule">
-                        <li class="time-time">9AM</li>
-                        <li class="green-time green-time1">
-                            <input class="user-task-input">
-                            <ul class="secondary-ul">
 
-                            </ul>
-                        </li>
-                        <submit class="save-time">Save</submit>
-                    </ul> -->
-                    
-                <!-- </div> -->
-
-
-
-                <!-- <div class="todos">
-                    <form id="todo-form" method="POST">
-                      <label for="todo-text">Add a Todo:</label>
-                      <input type="text" placeholder="What needs to be done?" name="todo-text" id="todo-text" />
-                    </form>
-                    <p>Todo Count: <span id="todo-count">0</span></p>
-                    <ul id="todo-list"></ul>
-                  </div> -->
         </div>
+
+        <div class="row">
+            <div class="col-lg-1 col-left">
+                <div class="hour" id="time-slot-10">10AM</div>
+            </div>
+            <div class="col-lg-10">
+                <div class="future future-10">
+                    <input type="text" placeholder="What needs to be done" name="task-text"
+                    class="task-input user-task-input-10am" />
+                    <ul class="task-list task-list-10am"></ul>
+                </div>
+                
+            </div>
+            <div class="col-lg-1 col-right">
+                <div class="saveBtn">
+                    <submit class="save-task save-task-10am">Save</submit>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-1 col-left">
+                <div class="hour" id="time-slot-11">11AM</div>
+            </div>
+            <div class="col-lg-10">
+                <div class="future future-11">
+                    <input type="text" placeholder="What needs to be done" name="task-text"
+                    class="task-input user-task-input-11am" />
+                    <ul class="task-list task-list-11am"></ul>
+                </div>
+                
+            </div>
+            <div class="col-lg-1 col-right">
+                <div class="saveBtn">
+                    <submit class="save-task save-task-11am">Save</submit>
+                </div>
+    
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-1 col-left">
+                <div class="hour" id="time-slot-12">12PM</div>
+            </div>
+            <div class="col-lg-10">
+                <div class="future future-12">
+                    <input type="text" placeholder="What needs to be done" name="task-text"
+                    class="task-input user-task-input-12am" />
+                <ul class="task-list task-list-12am"></ul>
+                </div>
+                
+            </div>
+            <div class="col-lg-1 col-right">
+                <div class="saveBtn">
+                    <submit class="save-task save-task-12am">Save</submit>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-1 col-left">
+                <div class="hour" id="time-slot-1">1PM</div>
+            </div>
+            <div class="col-lg-10">
+                <div class="future future-1">
+                    <input type="text" placeholder="What needs to be done" name="task-text"
+                    class="task-input user-task-input-1pm" />
+                    <ul class="task-list task-list-1am"></ul>
+                </div>
+                
+            </div>
+            <div class="col-lg-1 col-right">
+                <div class="saveBtn">
+                    <submit class="save-task save-task-1pm">Save</submit>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-1 col-left">
+                <div class="hour" id="time-slot-2">2PM</div>
+            </div>
+            <div class="col-lg-10">
+                <div class="future future-2">
+                    <input type="text" placeholder="What needs to be done" name="task-text"
+                    class="task-input user-task-input-2pm" />
+                    <ul class="task-list task-list-2pm"></ul>
+                </div>
+                
+            </div>
+            <div class="col-lg-1 col-right">
+                <div class="saveBtn">
+                    <submit class="save-task save-task-2pm">Save</submit>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-1 col-left">
+                <div class="hour" id="time-slot-3">3PM</div>
+            </div>
+            <div class="col-lg-10">
+                <div class="future future-3">
+                    <input type="text" placeholder="What needs to be done" name="task-text"
+                    class="task-input user-task-input-3pm" />
+                    <ul class="task-list task-list-3pm"></ul>
+                </div>
+                
+            </div>
+            <div class="col-lg-1 col-right">
+                <div class="saveBtn">
+                    <submit class="save-task save-task-3pm">Save</submit>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-1 col-left">
+                <div class="hour" id="time-slot-4">4PM</div>
+            </div>
+            <div class="col-lg-10">
+                <div class="future future-4">
+                    <input type="text" placeholder="What needs to be done" name="task-text"
+                    class="task-input user-task-input-4pm" />
+                <ul class="task-list task-list-4pm"></ul>
+                </div>
+                
+            </div>
+            <div class="col-lg-1 col-right">
+                <div class="saveBtn">
+                    <submit class="save-task save-task-4pm">Save</submit>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-1 col-left">
+                <div class="hour" id="time-slot-5">5PM</div>
+            </div>
+            <div class="col-lg-10">
+                <div class="future future-5">
+                    <input type="text" name="task-text"
+                    class="task-input user-task-input-5pm" />
+                <ul class="task-list task-list-5pm"></ul>
+                </div>
+                
+            </div>
+            <div class="col-lg-1 col-right">
+                <div class="saveBtn">
+                    <submit class="save-task save-task-5pm">Save</submit>
+                </div>
+                
+            </div>
+        </div>
+
     </div>
     <!-- <script> -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js" integrity="sha256-H9jAz//QLkDOy/nzE9G4aYijQtkLt9FvGmdUTwBk6gs=" crossorigin="anonymous"></script>
-<!-- <script src="moment.js"></script> -->
-<script>
-$(document).ready(function() {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"
+        integrity="sha256-H9jAz//QLkDOy/nzE9G4aYijQtkLt9FvGmdUTwBk6gs=" crossorigin="anonymous"></script>
+    <!-- <script src="moment.js"></script> -->
+    <script>
+        $(document).ready(function () {
 
 
-var tasksArray9AM = [];
-var tasksArray10AM = [];
+            var tasksArray9AM = [];
+            var tasksArray10AM = [];
+            var newListInput;
+            var hour = "9";
+            var amOnScreen = "am";
+            var pmOnScreen = "pm";
+            var state = "purple";
+
+            var timeHour = moment().format('h'); // January 30th 2020, 11:07:51 pm
+            var amPm = moment().format('a');
+            timeHour = "10";
+            amPm = "pm";
+            //test
+            var timeHour = "9";
+            var amPm = "am";
 
 
-   //get the local storage items here
-var dateAndTime = moment().format('MMMM Do YYYY, h:mm:ss a'); // January 30th 2020, 11:07:51 pm
-$(".date-time").text(dateAndTime);
-var weekDay = moment().format('dddd');                    // Thursday
-var monthAndDate = moment().format("MMMM Do");               // Jan 30th 20
-// moment().format('YYYY [escaped] YYYY');     // 2020 escaped 2020
-// moment().format();                          // 2020-01-30T23:07:51-08:00
-$(".date-time").text(weekDay + ", " + monthAndDate);
+            var weekDay = moment().format('dddd');                    // Thursday
+            var monthAndDate = moment().format("MMMM Do");               // Jan 30th 20
+            // moment().format('YYYY [escaped] YYYY');     // 2020 escaped 2020
+            // moment().format();                          // 2020-01-30T23:07:51-08:00
+            $(".date-time").text(weekDay + ", " + monthAndDate);
+        
+            
+                function timeSlotGreyOut(htmlTimePrint, futureClass) {
+                    // console.log("html: " + htmlTimePrint + "future: " + futureClass)
+                    arraySplit = htmlTimePrint.split("");
+                    var newTimeString;
+                    // console.log(arraySplit);
+
+                    if (arraySplit.length === 4) {
+                        var newTimeString = arraySplit[0] + arraySplit[1];
+                        var newAmPmString = arraySplit[2] + arraySplit[3];
+                        console.log("aahhhh " + newTimeString);
+                    }
+                    else if (arraySplit.length === 3) {
+                        var newTimeString = arraySplit[0];
+                        var newAmPmString = arraySplit[1] + arraySplit[2];
+                        console.log("aahhhh " + newTimeString);
+                    }
 
 
-//on clicking the save button,
-$(".save-time").on("click", function() {
-    var newListInput = $(".user-task-input").val(); // gathers the inputed item and puts into a varialbe. 
-    tasksArray9AM.push(newListInput);
+                    if (newTimeString === "12") {
+                        if (timeHour < 0 && newAmPmString.toLowerCase() === amPm) {
+                            futureClass.css("background-color", "#d3d3d3");
+                        }
+                    }
 
-    for (var i = 0; i < tasksArray9AM.length; i++) {
-        var newListItem = $("<li>");
-        newListItem.text(tasksArray9AM[i]);
-        localStorage.setItem("secondary-ul", tasksArray9AM[i]);
-    }
-     // takes the input and puts in list item
-    $(".secondary-ul").append(newListItem); // appends list item to the correct ul div
-    // localStorage.setItem("secondary-ul", newListInput);
-});
-function reloadPage() {
-    
-}
-});
-// creates a list emelent to put the data. 
-//appends to the individual list item
-//saves to local storage, 
+                    if (newTimeString === timeHour && newAmPmString.toLowerCase() === amPm)  {
+                        futureClass.css("background-color", "#ff6961");
 
-// ok so first in html have each block out and made. designed in css. 
-// the css style has to be trigged by the time. so that when i certain time happens, the block equalling that time, is changed in css.
+                    }
+                    
+                    if (amPm === "am") {
+                        if (parseInt(newTimeString) < parseInt(timeHour) && newAmPmString.toLowerCase() === amPm) {
+                        futureClass.css("background-color", "#d3d3d3");
+                    }
+                    }
+                    else if (amPm === "pm") {
+                        if (parseInt(newTimeString) < parseInt(timeHour) && newAmPmString.toLowerCase() === amPm) {
+                        futureClass.css("background-color", "#d3d3d3");
+                    }
+                    else if (parseInt(newTimeString) < parseInt(timeHour) && newAmPmString.toLowerCase() !== amPm)  {
+                        futureClass.css("background-color", "#d3d3d3");
+                    }
+                    }
+                }
+                
 
-// each input has to be changed dynamically 
+                var am9 = $("#time-slot-9").html();    
+            var am10 = $("#time-slot-10").html();
+            var am11 = $("#time-slot-11").html();
+            var pm12 = $("#time-slot-12").html();
+            var pm1 = $("#time-slot-1").html();
+            var pm2 = $("#time-slot-2").html();
+            var pm3 = $("#time-slot-3").html();
+            var pm4 = $("#time-slot-4").html();
+            var pm5 = $("#time-slot-5").html();
 
-// each div can have an html input quality. that when you save it, it saves to localstorage. 
-// will localstorage be able to save to the correct div?  
+            timeSlotGreyOut(am9, $(".future-9"));
+            timeSlotGreyOut(am10, $(".future-10"));
+            timeSlotGreyOut(am11, $(".future-11"));
+            timeSlotGreyOut(pm12, $(".future-12"));
+            timeSlotGreyOut(pm1, $(".future-1"));
+            timeSlotGreyOut(pm2, $(".future-2"));
+            timeSlotGreyOut(pm3, $(".future-3"));
+            timeSlotGreyOut(pm4, $(".future-4"));
+            timeSlotGreyOut(pm5, $(".future-5"));
 
-// a timer stopwatch that would count up to 30....if it passed 30....then the minutes on the other 30 min marker would go up as many minutes as are on the code watch. then when you pause, it wouldn't be pausing it, it would be starting the seconnd countdown clock.
+            localStorage.getItem(tasksArray9AM);
+            console.log(tasksArray9AM);
+            printArrayToDiv(tasksArray9AM, $(".task-list-9am"));
 
-//to do list for Friday: do the drink things. do the frankensence thing. take out the trash. send tiger schedules
-//later: do the baking soda thing. butt exercises, hiking, laundry, organizing, & cleaning
+
+            //on clicking the save button,
+            $(".save-task-9am").on("click", function () {
+                newListInput = $(".user-task-input-9am").val(); // gathers the inputed item and puts into a varialbe. 
+                pushToArray(newListInput, tasksArray9AM);
+                printArrayToDiv(tasksArray9AM, $(".task-list-9am"));
+            });
+
+            $(".save-task-10am").on("click", function () {
+                newListInput = $(".user-task-input-10am").val();
+                pushToArray(newListInput, tasksArray10AM);
+                printArrayToDiv(tasksArray10AM, $(".task-list-10am"));
 
 
-</script>
+                // for (var i = 0; i < tasksArray9AM.length; i++) {
+                //     var newListItem = $("<li>");
+                //     newListItem.text(tasksArray9AM[i]);
+                //     localStorage.setItem("task-list-9am", tasksArray9AM[i]);
+                // }
+                //  // takes the input and puts in list item
+                // $(".task-list-9am").append(newListItem); // appends list item to the correct ul div
+                // localStorage.setItem("task-list-9am", newListInput);
+            });
 
-    
+            function pushToArray(x, y) {
+                y.push(x);
+                // $(".task-list-9am").empty();
+                // printArrayToDiv(tasksArray9AM, $(".task-list-9am"));
+                localStorage.setItem("array9AM", y);
+            }
+
+            function printArrayToDiv(x, y) {
+                console.log("x: " + x + " y: " + y);
+                for (var i = 0; i < x.length; i++) {
+                    var newListItem = $("<li>");
+                    newListItem.text(x[i]);
+                }
+                y.append(newListItem);
+            }
+        });
+    </script>
+
+
 </body>
+
 </html>
