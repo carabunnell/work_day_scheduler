@@ -8,7 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="style.css"> -->
+
 </head>
 <style>
     .jumbotron {
@@ -26,51 +26,17 @@
         font-size: 16px;
     }
 
-    #schedule {
-        list-style-type: none;
-        margin: 0px;
-    }
-
     .task-list {
         display: list-item;
         list-style-type: none;
     }
 
-    /* .task-input-old {
-        background: grey !important;
-    } */
 
     .task-input {
         background-color: #77dd77;
     }
 
-    /* .user-task-input-9am {
-        background: purple;
-    } */
-    /* .task-row {
-    background: purple;
-} */
-
-
-    /* .save-task {
-        background-color: chartreuse;
-        border-bottom: solid white 1px;
-        width: 65px;
-        height: 65px;
-    } */
-
-    .description{
-  white-space: pre-wrap;
-}
-
-.time-block{
-  text-align: center;
-  border-radius: 15px;
-}
-
 .row {
-  /* white-space: pre-wrap; */
-  /* height: 80px; */
   border-top: 1px solid white;;
 }
 
@@ -80,30 +46,17 @@
   border-top: 1px dashed #000000;
 }
 
-/* .past {
-  background-color: #d3d3d3;
-  color: white;
-} */
-
-.present {
-  background-color: #ff6961;
-  color: white;
-}
-
 .future {
   background-color: #77dd77;
   color: white;
   min-height: 80px;
   padding: 0px;
   border-top: 1px solid white;
-  /* background-color: #d3d3d3; */
-  /* color: white; */
 }
 
 .saveBtn {
   border-left: 1px solid black;
   height: 80px;
-  /* width: px; */
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   background-color: #06AED5;
@@ -112,8 +65,8 @@
 
 .saveBtn:hover {
     opacity: 0.5px;
-  /* font-size: 20px;
-  transition: all .3s ease-in-out; */
+  font-size: 20px;
+  transition: all .3s ease-in-out;
 }
 .col-lg-10 {
     padding: 0px;
@@ -337,16 +290,23 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="btn">
+                    <button class="btn clear-all">Clear Content</button>
+                </div>
+            </div>
     </div>
     <!-- <script> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"
         integrity="sha256-H9jAz//QLkDOy/nzE9G4aYijQtkLt9FvGmdUTwBk6gs=" crossorigin="anonymous"></script>
-    <!-- <script src="moment.js"></script> -->
+    
     <script>
         $(document).ready(function () {
 
+//=========================================== VARIABLES ============================================
             var tasksArray8AM = [];
             var tasksArray9AM = [];
             var tasksArray10AM = [];
@@ -361,17 +321,26 @@
 
             var timeHour = moment().format('h'); // January 30th 2020, 11:07:51 pm
             var amPm = moment().format('a');
-            // timeHour = "6";
-            // amPm = "am";
+            // timeHour = "4";
+            // amPm = "pm";
 
             var weekDay = moment().format('dddd');                    // Thursday
-            var monthAndDate = moment().format("MMMM Do");               // Jan 30th 20
-            // moment().format('YYYY [escaped] YYYY');     // 2020 escaped 2020
-            // moment().format();                          // 2020-01-30T23:07:51-08:00
+            var monthAndDate = moment().format("MMMM Do");               // Jan 30th
             $(".date-time").text(weekDay + ", " + monthAndDate);
         
-            
-                function timeSlotGreyOut(htmlTimePrint, futureClass, inputClass) {
+            var am8 = $("#time-slot-8").html();
+            var am9 = $("#time-slot-9").html();    
+            var am10 = $("#time-slot-10").html();
+            var am11 = $("#time-slot-11").html();
+            var pm12 = $("#time-slot-12").html();
+            var pm1 = $("#time-slot-1").html();
+            var pm2 = $("#time-slot-2").html();
+            var pm3 = $("#time-slot-3").html();
+            var pm4 = $("#time-slot-4").html();
+            var pm5 = $("#time-slot-5").html();
+
+// =========================================== FUNCTIONS ==========================================================
+            function timeSlotGreyOut(htmlTimePrint, futureClass, inputClass) {
                     // console.log("html: " + htmlTimePrint + "future: " + futureClass)
                     arraySplit = htmlTimePrint.split("");
                     var newTimeString;
@@ -422,18 +391,29 @@
                         inputClass.css("background-color", "#ff6961");
                     }
                 }
-                
-            var am8 = $("#time-slot-8").html();
-            var am9 = $("#time-slot-9").html();    
-            var am10 = $("#time-slot-10").html();
-            var am11 = $("#time-slot-11").html();
-            var pm12 = $("#time-slot-12").html();
-            var pm1 = $("#time-slot-1").html();
-            var pm2 = $("#time-slot-2").html();
-            var pm3 = $("#time-slot-3").html();
-            var pm4 = $("#time-slot-4").html();
-            var pm5 = $("#time-slot-5").html();
+            
+            function getLocalStorage(storageIndex, properDiv, array) {
+                localStorage.getItem(array);
+                printArrayToDiv(array, properDiv);
+            }
 
+            function creatingDivTasks(taskInput, array, printTasks, storageName) {
+                // pass in the reference to the input, the array per button. the div printing
+                newListInput = taskInput.val();
+                array.push(newListInput);
+                printArrayToDiv(array, printTasks);
+                localStorage.setItem(storageName, array);
+            }
+
+            function printArrayToDiv(array, appendingDiv) {
+
+                for (var i = 0; i < array.length; i++) {
+                    var newListItem = $("<li>");
+                    newListItem.text(array[i]);
+                }
+                appendingDiv.append(newListItem);
+            }
+ //-================================= CALLING THE FUNCTIONS ================================================               
             timeSlotGreyOut(am8, $(".future-8"), $(".user-task-input-8am"));
             timeSlotGreyOut(am9, $(".future-9"), $(".user-task-input-9am"));
             timeSlotGreyOut(am10, $(".future-10"), $(".user-task-input-10am"));
@@ -445,27 +425,37 @@
             timeSlotGreyOut(pm4, $(".future-4"), $(".user-task-input-4pm"));
             timeSlotGreyOut(pm5, $(".future-5"), $(".user-task-input-5pm"));
 
-            localStorage.getItem(tasksArray9AM);
-            console.log(tasksArray9AM);
-            printArrayToDiv(tasksArray9AM, $(".task-list-9am"));
-            
-            function creatingDivTasks(taskInput, array, printTasks, storageName) {
-                // pass in the reference to the input, the array per button. the div printing
-                newListInput = taskInput.val();
-                array.push(newListInput);
-                printArrayToDiv(array, printTasks);
-                localStorage.setItem(storageName, array);
-            }
+            getLocalStorage("Array-8am", $(".task-list-8am"), tasksArray8AM);
 
+            // function getLocalStorage(storageIndex, properDiv, array) {
+            //     localStorage.getItem(array);
+            //     printArrayToDiv(array, properDiv);
+            // }
+
+            // function creatingDivTasks(taskInput, array, printTasks, storageName) {
+            //     // pass in the reference to the input, the array per button. the div printing
+            //     newListInput = taskInput.val();
+            //     array.push(newListInput);
+            //     printArrayToDiv(array, printTasks);
+            //     localStorage.setItem(storageName, array);
+            // }
+
+            // function printArrayToDiv(array, appendingDiv) {
+
+            //     for (var i = 0; i < array.length; i++) {
+            //         var newListItem = $("<li>");
+            //         newListItem.text(array[i]);
+            //     }
+            //     appendingDiv.append(newListItem);
+            // }
+// ============================================ ON CLICK ==========================================
+            //on clicking the save button,
             $(".save-task-8am").on("click", function () {
                 creatingDivTasks($(".user-task-input-8am"), tasksArray8AM, $(".task-list-8am"), "Array-8am");
             });
-            //on clicking the save button,
+
             $(".save-task-9am").on("click", function () {
                 creatingDivTasks($(".user-task-input-9am"), tasksArray9AM, $(".task-list-9am"), "Array-9am");
-                // newListInput = $(".user-task-input-9am").val(); // gathers the inputed item and puts into a varialbe. 
-                // pushToArray(newListInput, tasksArray9AM);
-                // printArrayToDiv(tasksArray9AM, $(".task-list-9am"));
             });
 
             $(".save-task-10am").on("click", function () {
@@ -496,32 +486,12 @@
             $(".save-task-5pm").on("click", function () {
                 creatingDivTasks($(".user-task-input-5pm"), tasksArray5PM, $(".task-list-5pm"), "Array-5pm");
             });
+            $(".clear-all").on("click", function() {
+                localStorage.clear();
+            });
 
-
-            function pushToArray(x, y) {
-                y.push(x);
-                // $(".task-list-9am").empty();
-                // printArrayToDiv(tasksArray9AM, $(".task-list-9am"));
-                localStorage.setItem("array9AM", y);
-            }
-
-            function printArrayToDiv(x, y) {
-                console.log("x: " + x + " y: " + y);
-                for (var i = 0; i < x.length; i++) {
-                    var newListItem = $("<li>");
-                    newListItem.text(x[i]);
-                }
-                y.append(newListItem);
-            }
         });
-        // for (var i = 0; i < tasksArray9AM.length; i++) {
-                //     var newListItem = $("<li>");
-                //     newListItem.text(tasksArray9AM[i]);
-                //     localStorage.setItem("task-list-9am", tasksArray9AM[i]);
-                // }
-                //  // takes the input and puts in list item
-                // $(".task-list-9am").append(newListItem); // appends list item to the correct ul div
-                // localStorage.setItem("task-list-9am", newListInput);
+       
     </script>
 
 
