@@ -134,6 +134,27 @@
         </div>
         <div class="row">
             <div class="col-lg-1 col-left">
+                <div class="hour" id="time-slot-8">8AM</div>
+            </div>
+            <div class="col-lg-10">
+                <div class="future future-8">
+                    <input type="text" name="task-text"
+                    class="task-input user-task-input-8am" />
+                    <ul class="task-list task-list-8am"></ul>
+                </div>
+                
+            </div>
+            <div class="col-lg-1 col-right">
+                <div class="saveBtn">
+                    <submit class="save-task save-task-9am">Save</submit>
+                </div>
+               
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-1 col-left">
                 <div class="hour" id="time-slot-9" value="9">9AM</div>
             </div>
             <div class="col-lg-10">
@@ -200,14 +221,14 @@
             <div class="col-lg-10">
                 <div class="future future-12">
                     <input type="text" placeholder="What needs to be done" name="task-text"
-                    class="task-input user-task-input-12am" />
-                <ul class="task-list task-list-12am"></ul>
+                    class="task-input user-task-input-12pm" />
+                <ul class="task-list task-list-12pm"></ul>
                 </div>
                 
             </div>
             <div class="col-lg-1 col-right">
                 <div class="saveBtn">
-                    <submit class="save-task save-task-12am">Save</submit>
+                    <submit class="save-task save-task-12pm">Save</submit>
                 </div>
                 
             </div>
@@ -221,7 +242,7 @@
                 <div class="future future-1">
                     <input type="text" placeholder="What needs to be done" name="task-text"
                     class="task-input user-task-input-1pm" />
-                    <ul class="task-list task-list-1am"></ul>
+                    <ul class="task-list task-list-1pm"></ul>
                 </div>
                 
             </div>
@@ -328,24 +349,15 @@
             var tasksArray10AM = [];
             var tasksArray11AM = [];
             var tasksArray12PM = [];
-            var tasksArray1AM = [];
+            var tasksArray1PM = [];
             var tasksArray2PM = [];
             var tasksArray3PM = [];
             var tasksArray4PM = [];
             var tasksArray5PM = [];
             var newListInput;
-            // var hour = "9";
-            // var amOnScreen = "am";
-            // var pmOnScreen = "pm";
 
             var timeHour = moment().format('h'); // January 30th 2020, 11:07:51 pm
             var amPm = moment().format('a');
-            // timeHour = "10";
-            // amPm = "pm";
-            //test
-            var timeHour = "12";
-            var amPm = "pm";
-
 
             var weekDay = moment().format('dddd');                    // Thursday
             var monthAndDate = moment().format("MMMM Do");               // Jan 30th 20
@@ -363,7 +375,7 @@
                     if (arraySplit.length === 4) {
                         var newTimeString = arraySplit[0] + arraySplit[1];
                         var newAmPmString = arraySplit[2] + arraySplit[3];
-                        console.log("aahhhh " + newTimeString);
+                        console.log("aahhhh " + newTimeString + " " + newAmPmString.toLowerCase());
                     }
                     else if (arraySplit.length === 3) {
                         var newTimeString = arraySplit[0];
@@ -371,51 +383,37 @@
                         console.log("aahhhh " + newTimeString);
                     }
 
-
-                    if (amPm === "pm") {
+                    if (amPm === "pm" && timeHour !== "12") {
                         if (newAmPmString.toLowerCase() === "am") {
                             futureClass.css("background-color", "#d3d3d3");
                         }
                         else if (parseInt(newTimeString) < parseInt(timeHour)) {
                             futureClass.css("background-color", "#d3d3d3");
                         }
+                        else if (parseInt(newTimeString) > parseInt(timeHour)) {
+                            $(".future-12").css("background-color", "#d3d3d3");
+                        }
+                        
                     }
-                    else if (amPm === "am") {
-                        // if (newAmPmString.toLowerCase() === "pm") {
-                        //     futureClass.css("background-color", "#d3d3d3");
-                        // }
-                        if (parseInt(newTimeString) < parseInt(timeHour) && newAmPmString.toLowerCase() === "am") {
+                    else if (amPm === "pm" && timeHour === "12") {
+                        if (newAmPmString.toLowerCase() === "am") {
                             futureClass.css("background-color", "#d3d3d3");
                         }
                     }
-
-                    if (newTimeString === "12") {
-                        if (timeHour < 0 && amPm === "pm") {
+                    
+                    else if (amPm === "am") {
+                        if (parseInt(newTimeString) < parseInt(timeHour) && newAmPmString.toLowerCase() === "am") {
                             futureClass.css("background-color", "#d3d3d3");
                         }
                     }
 
                     if (newTimeString === timeHour && newAmPmString.toLowerCase() === amPm)  {
                         futureClass.css("background-color", "#ff6961");
-
                     }
-                    // if (amPm === "am") {
-                    //     if (parseInt(newTimeString) < parseInt(timeHour) && newAmPmString.toLowerCase() === amPm) {
-                    //     futureClass.css("background-color", "#d3d3d3");
-                    // }
-                    // }
-                    // else if (amPm === "pm") {
-                    //     if (parseInt(newTimeString) < parseInt(timeHour) && newAmPmString.toLowerCase() === amPm) {
-                    //     futureClass.css("background-color", "#d3d3d3");
-                    // }
-                    // else if (parseInt(newTimeString) < parseInt(timeHour) && newAmPmString.toLowerCase() !== amPm)  {
-                    //     futureClass.css("background-color", "#d3d3d3");
-                    // }
-                    // }
                 }
                 
-
-                var am9 = $("#time-slot-9").html();    
+            var am8 = $("#time-slot-8").html();
+            var am9 = $("#time-slot-9").html();    
             var am10 = $("#time-slot-10").html();
             var am11 = $("#time-slot-11").html();
             var pm12 = $("#time-slot-12").html();
@@ -425,6 +423,7 @@
             var pm4 = $("#time-slot-4").html();
             var pm5 = $("#time-slot-5").html();
 
+            timeSlotGreyOut(am8, $(".future-8"));
             timeSlotGreyOut(am9, $(".future-9"));
             timeSlotGreyOut(am10, $(".future-10"));
             timeSlotGreyOut(am11, $(".future-11"));
@@ -438,30 +437,52 @@
             localStorage.getItem(tasksArray9AM);
             console.log(tasksArray9AM);
             printArrayToDiv(tasksArray9AM, $(".task-list-9am"));
-
+            
+            function creatingDivTasks(taskInput, array, printTasks, storageName) {
+                // pass in the reference to the input, the array per button. the div printing
+                newListInput = taskInput.val();
+                array.push(newListInput);
+                printArrayToDiv(array, printTasks);
+                localStorage.setItem(storageName, array);
+            }
 
             //on clicking the save button,
             $(".save-task-9am").on("click", function () {
-                newListInput = $(".user-task-input-9am").val(); // gathers the inputed item and puts into a varialbe. 
-                pushToArray(newListInput, tasksArray9AM);
-                printArrayToDiv(tasksArray9AM, $(".task-list-9am"));
+                creatingDivTasks($(".user-task-input-9am"), tasksArray9AM, $(".task-list-9am"), "Array-9am");
+                // newListInput = $(".user-task-input-9am").val(); // gathers the inputed item and puts into a varialbe. 
+                // pushToArray(newListInput, tasksArray9AM);
+                // printArrayToDiv(tasksArray9AM, $(".task-list-9am"));
             });
 
             $(".save-task-10am").on("click", function () {
-                newListInput = $(".user-task-input-10am").val();
-                pushToArray(newListInput, tasksArray10AM);
-                printArrayToDiv(tasksArray10AM, $(".task-list-10am"));
-
-
-                // for (var i = 0; i < tasksArray9AM.length; i++) {
-                //     var newListItem = $("<li>");
-                //     newListItem.text(tasksArray9AM[i]);
-                //     localStorage.setItem("task-list-9am", tasksArray9AM[i]);
-                // }
-                //  // takes the input and puts in list item
-                // $(".task-list-9am").append(newListItem); // appends list item to the correct ul div
-                // localStorage.setItem("task-list-9am", newListInput);
+                creatingDivTasks($(".user-task-input-10am"), tasksArray10AM, $(".task-list-10am"), "Array-10am");
             });
+
+            $(".save-task-11am").on("click", function () {
+                creatingDivTasks($(".user-task-input-11am"), tasksArray11AM, $(".task-list-11am"), "Array-11am");
+            });
+
+            $(".save-task-12pm").on("click", function () {
+                creatingDivTasks($(".user-task-input-12pm"), tasksArray12PM, $(".task-list-12pm"), "Array-12pm");
+            });
+            $(".save-task-1pm").on("click", function () {
+                creatingDivTasks($(".user-task-input-1pm"), tasksArray1PM, $(".task-list-1pm"), "Array-1pm");
+            });
+
+            $(".save-task-2pm").on("click", function () {
+                creatingDivTasks($(".user-task-input-2pm"), tasksArray2PM, $(".task-list-2pm"), "Array-2pm");
+            });
+            $(".save-task-3pm").on("click", function () {
+                creatingDivTasks($(".user-task-input-3pm"), tasksArray3PM, $(".task-list-3pm"), "Array-3pm");
+            });
+
+            $(".save-task-4pm").on("click", function () {
+                creatingDivTasks($(".user-task-input-4pm"), tasksArray4PM, $(".task-list-4pm"), "Array-4pm");
+            });
+            $(".save-task-5pm").on("click", function () {
+                creatingDivTasks($(".user-task-input-5pm"), tasksArray5PM, $(".task-list-5pm"), "Array-5pm");
+            });
+
 
             function pushToArray(x, y) {
                 y.push(x);
@@ -479,6 +500,14 @@
                 y.append(newListItem);
             }
         });
+        // for (var i = 0; i < tasksArray9AM.length; i++) {
+                //     var newListItem = $("<li>");
+                //     newListItem.text(tasksArray9AM[i]);
+                //     localStorage.setItem("task-list-9am", tasksArray9AM[i]);
+                // }
+                //  // takes the input and puts in list item
+                // $(".task-list-9am").append(newListItem); // appends list item to the correct ul div
+                // localStorage.setItem("task-list-9am", newListInput);
     </script>
 
 
