@@ -326,19 +326,25 @@
 
             var tasksArray9AM = [];
             var tasksArray10AM = [];
+            var tasksArray11AM = [];
+            var tasksArray12PM = [];
+            var tasksArray1AM = [];
+            var tasksArray2PM = [];
+            var tasksArray3PM = [];
+            var tasksArray4PM = [];
+            var tasksArray5PM = [];
             var newListInput;
-            var hour = "9";
-            var amOnScreen = "am";
-            var pmOnScreen = "pm";
-            var state = "purple";
+            // var hour = "9";
+            // var amOnScreen = "am";
+            // var pmOnScreen = "pm";
 
             var timeHour = moment().format('h'); // January 30th 2020, 11:07:51 pm
             var amPm = moment().format('a');
             // timeHour = "10";
             // amPm = "pm";
-            // //test
-            // var timeHour = "9";
-            // var amPm = "am";
+            //test
+            var timeHour = "12";
+            var amPm = "pm";
 
 
             var weekDay = moment().format('dddd');                    // Thursday
@@ -366,8 +372,25 @@
                     }
 
 
+                    if (amPm === "pm") {
+                        if (newAmPmString.toLowerCase() === "am") {
+                            futureClass.css("background-color", "#d3d3d3");
+                        }
+                        else if (parseInt(newTimeString) < parseInt(timeHour)) {
+                            futureClass.css("background-color", "#d3d3d3");
+                        }
+                    }
+                    else if (amPm === "am") {
+                        // if (newAmPmString.toLowerCase() === "pm") {
+                        //     futureClass.css("background-color", "#d3d3d3");
+                        // }
+                        if (parseInt(newTimeString) < parseInt(timeHour) && newAmPmString.toLowerCase() === "am") {
+                            futureClass.css("background-color", "#d3d3d3");
+                        }
+                    }
+
                     if (newTimeString === "12") {
-                        if (timeHour < 0 && newAmPmString.toLowerCase() === amPm) {
+                        if (timeHour < 0 && amPm === "pm") {
                             futureClass.css("background-color", "#d3d3d3");
                         }
                     }
@@ -376,20 +399,19 @@
                         futureClass.css("background-color", "#ff6961");
 
                     }
-                    
-                    if (amPm === "am") {
-                        if (parseInt(newTimeString) < parseInt(timeHour) && newAmPmString.toLowerCase() === amPm) {
-                        futureClass.css("background-color", "#d3d3d3");
-                    }
-                    }
-                    else if (amPm === "pm") {
-                        if (parseInt(newTimeString) < parseInt(timeHour) && newAmPmString.toLowerCase() === amPm) {
-                        futureClass.css("background-color", "#d3d3d3");
-                    }
-                    else if (parseInt(newTimeString) < parseInt(timeHour) && newAmPmString.toLowerCase() !== amPm)  {
-                        futureClass.css("background-color", "#d3d3d3");
-                    }
-                    }
+                    // if (amPm === "am") {
+                    //     if (parseInt(newTimeString) < parseInt(timeHour) && newAmPmString.toLowerCase() === amPm) {
+                    //     futureClass.css("background-color", "#d3d3d3");
+                    // }
+                    // }
+                    // else if (amPm === "pm") {
+                    //     if (parseInt(newTimeString) < parseInt(timeHour) && newAmPmString.toLowerCase() === amPm) {
+                    //     futureClass.css("background-color", "#d3d3d3");
+                    // }
+                    // else if (parseInt(newTimeString) < parseInt(timeHour) && newAmPmString.toLowerCase() !== amPm)  {
+                    //     futureClass.css("background-color", "#d3d3d3");
+                    // }
+                    // }
                 }
                 
 
